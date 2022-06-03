@@ -382,9 +382,6 @@ restart.addEventListener("mousedown", function (e) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     animate();
   }
-  setTimeout(() => {
-    restart.style.visibility = "hidden";
-  }, 200);
-
+  restart.style.visibility = "hidden";
   reset = false;
 });
