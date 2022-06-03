@@ -19,25 +19,25 @@ ctx.fillStyle = "white";
 
 //SOUND /Effects
 const crunch = document.createElement("audio");
-crunch.src = "mixkit-chewing-something-crunchy-2244.wav";
+crunch.src = "./sounds/mixkit-chewing-something-crunchy-2244.wav";
 crunch.duration = 300;
 crunch.volume = 0.1;
 const explosion1 = document.createElement("audio");
-explosion1.src = "explosion1.ogg";
+explosion1.src = "./sounds/explosion1.ogg";
 explosion1.duration = 300;
 explosion1.volume = 0.1;
 const music = document.createElement("audio");
 music.volume = 0.1;
-music.src = "Fight Amidst the Destruction -shortloop.mp3";
+music.src = "./sounds/Fight Amidst the Destruction -shortloop.mp3";
 music.loop = true;
 
 const gameOverSound = document.createElement("audio");
-gameOverSound.src = "gameover-sad.wav";
+gameOverSound.src = "./sounds/gameover-sad.wav";
 gameOverSound.volume = 0.1;
 
 //BACKGROUNDS
 const Background = new Image();
-Background.src = "water.png";
+Background.src = "./images/background/water.png";
 
 const BG = {
   x1: 0,
@@ -57,10 +57,7 @@ function handleBackground() {
 
 //ICONS
 let BubbleIcon = new Image();
-BubbleIcon.src = "bubble-256px.png";
-
-let Water = new Image();
-Water.src = "water.png";
+BubbleIcon.src = "./images/bubble/bubble-256px.png";
 
 //Mouse interactivity
 let canvasPosition = canvas.getBoundingClientRect();
@@ -91,9 +88,9 @@ canvas.addEventListener("mouseup", function (e) {
 
 //Player
 const playerImageLeft = new Image();
-playerImageLeft.src = "hero.png";
+playerImageLeft.src = "./images/hero/hero.png";
 const playerImageRight = new Image();
-playerImageRight.src = "hero-vertically-flipped.png";
+playerImageRight.src = "./images/hero/hero-vertically-flipped.png";
 
 class Player {
   constructor() {
@@ -239,17 +236,17 @@ function handleBubbles() {
 
 const enemies = [];
 const enemyImage = new Image();
-enemyImage.src = "enemy.png";
+enemyImage.src = "./images/enemy/enemy.png";
 const enemyImage2 = new Image();
-enemyImage2.src = "enemy-green.png";
+enemyImage2.src = "./images/enemy/enemy-green.png";
 const enemyImage3 = new Image();
-enemyImage3.src = "enemy-orange.png";
+enemyImage3.src = "./images/enemy/enemy-orange.png";
 const enemyImage4 = new Image();
-enemyImage4.src = "enemy-pink.png";
+enemyImage4.src = "./images/enemy/enemy-pink.png";
 const enemyImage5 = new Image();
-enemyImage5.src = "enemy-red.png";
+enemyImage5.src = "./images/enemy/enemy-red.png";
 const enemyImage6 = new Image();
-enemyImage6.src = "enemy-yellow.png";
+enemyImage6.src = "./images/enemy/enemy-yellow.png";
 enemies.push(
   enemyImage,
   enemyImage2,
@@ -349,9 +346,9 @@ function handleGameover() {
 
 function handleMute() {
   const muteIcon = new Image();
-  muteIcon.src = "mute.png";
+  muteIcon.src = "./images/misc/mute.png";
   const soundOn = new Image();
-  soundOn.src = "sound-on.png";
+  soundOn.src = "./images/misc/sound-on.png";
   if (mute) {
     music.pause();
     crunch.pause();
