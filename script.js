@@ -90,8 +90,10 @@ canvas.addEventListener("mouseup", function (e) {
 });
 
 //Player
-const playerImage = new Image();
-playerImage.src = "hero.png";
+const playerImageLeft = new Image();
+playerImageLeft.src = "hero.png";
+const playerImageRight = new Image();
+playerImageRight.src = "hero-vertically-flipped.png";
 
 class Player {
   constructor() {
@@ -109,14 +111,14 @@ class Player {
   update() {
     const dx = this.x - mouse.x;
     const dy = this.y - mouse.y;
-    // let theta = Math.atan2(dy, dx);
-    // console.log({ theta });
-    // this.angle = theta;
-    if (mouse.x != this.x) this.x -= dx / 20;
-    if (mouse.y != this.y) this.y -= dy / 20;
+    let theta = Math.atan2(dy, dx);
+
+    this.angle = theta;
+    if (mouse.x != this.x) this.x -= dx / 10;
+    if (mouse.y != this.y) this.y -= dy / 10;
     if (gameFrame % 5 == 0) {
-      this.frame++;
-      if (this.frame > 12) this.frame = 0;
+      ++this.frame;
+      if (this.frame > 11) this.frame = 0;
       if (this.frame == 3 || this.frame == 7 || this.frame == 11) {
         this.frameX = 0;
       } else {
@@ -130,11 +132,7 @@ class Player {
   }
   draw() {
     if (mouse.click) {
-      //   ctx.lineWidth = 0.2;
-      //   ctx.beginPath();
       ctx.moveTo(this.x, this.y);
-      //   ctx.lineTo(mouse.x, mouse.y);
-      //   ctx.stroke();
     }
     // ctx.fillStyle = "white";
     ctx.beginPath();
@@ -143,19 +141,36 @@ class Player {
     // ctx.drawImage(PlayerImage, this.x - 76, this.y - 50, 148, 100);
     //ghost
     ctx.save();
-    // ctx.translate(this.x, this.y);
-    // ctx.rotate(this.angle);
-    ctx.drawImage(
-      playerImage,
-      this.frameX * this.spriteWidth,
-      this.frameY * this.spriteHeight,
-      this.spriteWidth,
-      this.spriteHeight,
-      this.x - 50,
-      this.y - 40,
-      this.spriteWidth / 4.5,
-      this.spriteHeight / 4.5
-    );
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    if (this.x >= mouse.x) {
+      ctx.drawImage(
+        playerImageLeft,
+        this.frameX * this.spriteWidth,
+        this.frameY * this.spriteHeight,
+        this.spriteWidth,
+        this.spriteHeight,
+        0 - 50,
+        0 - 40,
+        this.spriteWidth / 4.5,
+        this.spriteHeight / 4.5
+      );
+    } else {
+      ctx.drawImage(
+        playerImageRight,
+        this.frameX * this.spriteWidth,
+        this.frameY * this.spriteHeight,
+        this.spriteWidth,
+        this.spriteHeight,
+        0 - 50,
+        0 - 40,
+        this.spriteWidth / 4.5,
+        this.spriteHeight / 4.5
+      );
+    }
+
+    ctx.restore();
+
     ctx.restore();
   }
 }
@@ -259,7 +274,7 @@ class Enemy {
   draw() {
     // ctx.fillStyle = "red";
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     // ctx.fill();
     ctx.drawImage(
       this.image,
@@ -281,8 +296,8 @@ class Enemy {
       this.speed = Math.random() * 2 + 1;
     }
     if (gameFrame % 5 == 0) {
-      this.frame++;
-      if (this.frame > 12) this.frame = 0;
+      ++this.frame;
+      if (this.frame > 11) this.frame = 0;
       if (this.frame == 3 || this.frame == 7 || this.frame == 11) {
         this.frameX = 0;
       } else {
@@ -300,9 +315,6 @@ class Enemy {
     if (distance < this.radius + player.radius) handleGameover();
   }
 }
-const randomEnemy = new Enemy(
-  enemies[Math.floor(Math.random() * enemies.length)]
-);
 
 const enemiesArray = [new Enemy()];
 function handleEnemies() {
@@ -314,6 +326,7 @@ function handleEnemies() {
     enemiesArray[i].draw();
     if (enemiesArray[i].x < 0) {
       enemiesArray.splice(i, 1);
+      i--;
     }
   }
 }
