@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#Canvas {
+  width: 800px;
+  height: 500px;
+  border: 2px solid black;
+  background: url("./background.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+#restart {
+  text-align: center;
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  padding: 10px 10px 10px 10px;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 0.2em gray;
+  cursor: pointer;
+}
+
+/* @font-face {
+  font-family: 'Press Start 2p';
+} */
+
+#restart:active {
+  box-shadow: none;
+  position: relative;
+  top: 0.2em;
+  user-select: none;
+}
